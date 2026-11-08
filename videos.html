@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Videos · Tame Impala (fan concept)</title>
+<meta name="description" content="Tame Impala music videos, all in one place. A fan-made concept.">
+<meta name="theme-color" content="#f3f0ea">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Videos · Tame Impala (fan concept)">
+<meta property="og:description" content="Tame Impala music videos, all in one place. A fan-made concept.">
+<meta property="og:url" content="https://mailtathagatasarkar-a11y.github.io/tame-impala-concept/videos.html">
+<meta property="og:image" content="https://mailtathagatasarkar-a11y.github.io/tame-impala-concept/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=14">
+</head>
+<body data-theme="light">
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="mono" href="index.html" aria-label="Tame Impala, home">TI</a>
+  <nav class="nav" aria-label="Main">
+    <a href="music.html">Music</a>
+    <a href="tour.html">Tour</a>
+    <a href="videos.html" aria-current="page">Videos</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="http://TameImpala.lnk.to/TameImpalaStoreAW" target="_blank" rel="noopener">Store<span class="sr"> (opens in new tab)</span></a>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
+</header>
+
+<div class="sheet" id="sheet" hidden>
+  <nav aria-label="Main (mobile)">
+    <a href="index.html">Home</a>
+    <a href="music.html">Music</a>
+    <a href="tour.html">Tour</a>
+    <a href="videos.html" aria-current="page">Videos</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="http://TameImpala.lnk.to/TameImpalaStoreAW" target="_blank" rel="noopener">Store</a>
+  </nav>
+</div>
+
+<main id="top">
+  <section class="page-head grain" data-theme="light" aria-labelledby="page-h">
+    <p class="crumb"><a href="index.html">Tame Impala</a> <span aria-hidden="true">/</span> Videos</p>
+    <h1 class="page-title" id="page-h"><span class="pt-word">Videos</span><canvas class="film title-chip" data-paint="scene:v0" data-grain=".36" aria-hidden="true"></canvas></h1>
+    <div class="page-head__row"><p class="page-intro">The videos, all in one place. Each one opens on YouTube.</p><p class="page-meta">5 videos</p></div>
+  </section>
+
+  <section class="section vids" id="content" data-theme="dark" aria-labelledby="vids-h">
+    <div class="sec-top">
+      <h2 class="label" id="vids-h"><b></b>Videos</h2>
+      <p class="sec-top__note">Frames shown here are concept art, not stills from the videos.</p>
+    </div>
+    <ol class="vgrid" id="video-grid"></ol>
+  </section>
+
+  <section class="sign grain" id="signup" data-theme="light" aria-labelledby="sign-h">
+    <div class="sec-top">
+      <h2 class="label" id="sign-h"><b></b>Sign up</h2>
+      <p class="sec-top__note">New music, tour dates and the odd store drop. That’s it, promise.</p>
+    </div>
+    <form class="sign__form" id="sign-form" novalidate>
+      <label class="cell" for="email"><span>Your email</span>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="email-msg"></label>
+      <label class="cell" for="country"><span>Where you are</span>
+        <input id="country" name="country" type="text" autocomplete="country-name" placeholder="Optional"></label>
+      <button class="cell cell--btn" type="submit">Keep me posted <i aria-hidden="true">→</i></button>
+    </form>
+    <p class="sign__msg" id="email-msg" role="status" aria-live="polite"></p>
+    <p class="sign__fine">This is a fan concept, so the form doesn’t send anything yet.</p>
+  </section>
+
+</main>
+
+<footer class="foot grain" data-theme="light">
+  <p class="foot__word" aria-hidden="true">Tame Impala</p>
+  <div class="foot__row">
+    <p>A fan-made concept, built with love. Not affiliated with Tame Impala or Sony Music. Tickets, music, store and news links all go to the official sources.</p>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="tour.html">Tour</a></li>
+      <li><a href="videos.html">Videos</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="http://TameImpala.lnk.to/TameImpalaStoreAW" target="_blank" rel="noopener">Store<span class="sr"> (opens in new tab)</span></a></li>
+      <li><a href="https://www.tameimpala.com/" target="_blank" rel="noopener">Official site<span class="sr"> (opens in new tab)</span></a></li>
+    </ul>
+  </div>
+</footer>
+
+<aside class="np" aria-label="Background sound">
+  <p class="np__info"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><small>Now playing</small><b id="np-title">Nothing yet</b></span></p>
+  <button type="button" class="np__toggle" id="sound" aria-pressed="false">Sound <span id="sound-state">off</span></button>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="app.js?v=13"></script>
+</body>
+</html>
