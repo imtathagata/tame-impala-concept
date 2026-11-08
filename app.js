@@ -263,11 +263,11 @@
   if (isHome) {
     // painted wide (the wordmark gap's shape); the arch crops the sides and keeps the figures centred
     const archRes = () => { const h = arch.offsetHeight / 3; return { w: h * 1.65, h }; };
+    const heroRes = () => { const w = Math.min(640, Math.max(innerWidth, innerHeight * 1.65) / 3); return { w, h: w / 1.65 }; };
     heroFilm = motion
-      ? new Film($('.morph .film'), { paint: SCENES.hero, grain: .32, res: archRes })
+      ? new Film($('.morph .film'), { paint: SCENES.hero, grain: .42, res: heroRes })
       : new Film(chipEl, { paint: SCENES.hero, grain: .32, scale: 2.5 });
     const archFilm = new Film($('.release__film'), { paint: SCENES.hero, grain: .42, res: archRes });
-    if (motion) archFilm.reveal = 1;
     // cursor clears the static, inside the arch only
     arch.addEventListener('pointermove', e => {
       const r = arch.getBoundingClientRect();
@@ -507,35 +507,29 @@
     if (isHome) {
       const hero = $('.hero'), morph = $('.morph');
       const box = (el, root) => { let x = 0, y = 0, n = el; while (n && n !== root) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return { x, y, w: el.offsetWidth, h: el.offsetHeight }; };
-      const from = () => box(chipEl, hero);    // the gap in the wordmark
-      const to = () => box(arch, release);     // the arch, where it sits once the release covers the hero
-      // the release overlaps the end of the pin exactly, so the photo can land in its arch
-      const overlap = () => { release.style.marginTop = -hero.offsetHeight + 'px'; };
-      overlap(); ScrollTrigger.addEventListener('refreshInit', overlap);
+      const chip = () => box(chipEl, hero);   // the gap in the wordmark, where the film comes to rest
+      const shade = p => { if (sheet.hidden) document.body.dataset.theme = p < .14 ? 'dark' : 'light'; };
 
-      let shown = false;
-      const showRelease = on => {
-        if (on === shown) return; shown = on;
-        release.classList.toggle('on', on);
-        if (on) gsap.fromTo('.release__text > *, .corner', { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, stagger: .07, ease: 'power3.out' });
-      };
-
-      // the photo in the wordmark lifts out and lands in the Deadbeat arch
+      // 1. the film opens full screen; scrolling shrinks it into the wordmark while the words close in
       gsap.timeline({
+        defaults: { ease: 'none' },
         scrollTrigger: {
-          trigger: hero, start: 'top top', end: '+=110%', scrub: .7, pin: true, invalidateOnRefresh: true,
-          onUpdate: self => showRelease(self.progress > .995),
-          onRefresh: self => showRelease(self.progress > .995)
+          trigger: hero, start: 'top top', end: '+=120%', scrub: .8, pin: true, invalidateOnRefresh: true,
+          onUpdate: self => shade(self.progress), onRefresh: self => shade(self.progress)
         }
       })
-        .to(tame, { x: () => -innerWidth * .9, duration: 1, ease: 'power2.in' }, 0)
-        .to(imp, { x: () => innerWidth * .9, duration: 1, ease: 'power2.in' }, 0)
-        .to('.hero__intro', { autoAlpha: 0, y: 20, duration: .25 }, 0)
+        .to('.cue', { autoAlpha: 0, y: 12, duration: .12 }, 0)
         .fromTo(morph,
-          { left: () => from().x, top: () => from().y, width: () => from().w, height: () => from().h, borderTopLeftRadius: 0, borderTopRightRadius: 0 },
-          { left: () => to().x, top: () => to().y, width: () => to().w, height: () => to().h,
-            borderTopLeftRadius: () => to().w / 2, borderTopRightRadius: () => to().w / 2, duration: 1, ease: 'power2.inOut', immediateRender: true }, 0)
-        .to(heroFilm, { amp: .42, duration: 1, ease: 'none' }, 0);
+          { left: 0, top: 0, width: () => hero.offsetWidth, height: () => innerHeight },
+          { left: () => chip().x, top: () => chip().y, width: () => chip().w, height: () => chip().h, duration: 1, ease: 'power3.inOut', immediateRender: true }, 0)
+        .fromTo(tame, { x: () => -innerWidth * .7 }, { x: 0, duration: .9, ease: 'power3.out', immediateRender: true }, .1)
+        .fromTo(imp, { x: () => innerWidth * .7 }, { x: 0, duration: .9, ease: 'power3.out', immediateRender: true }, .1)
+        .fromTo(heroFilm, { amp: .42 }, { amp: .32, duration: 1 }, 0)
+        .fromTo('.hero__intro', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .25, immediateRender: true }, .8)
+        .to({}, { duration: .15 });   // a short hold on the finished wordmark before the page moves on
+
+      // 2. the Deadbeat arch arrives with the ordinary scroll
+      gsap.from('.release__text > *, .corner', { y: 24, autoAlpha: 0, duration: .8, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: release, start: 'top 55%' } });
     }
 
     // page titles: letters rise, the noise chip opens from a sliver

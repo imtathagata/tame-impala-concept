@@ -127,12 +127,13 @@ body > main > .listen{padding-bottom:0}
 .corner{position:absolute;z-index:3;right:0;bottom:70px;background:var(--orange);color:var(--ink);padding:22px 30px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:flex;gap:44px;transition:background .2s,color .2s}
 .corner:hover{background:var(--ink);color:var(--paper)}
 .release__hint{position:absolute;left:var(--gut);top:84px;margin:0;font-size:12px;font-weight:600;color:var(--muted)}
-/* motion mode: the release sits on top of the pinned hero and appears the moment the photo lands */
-.morph{display:none}
+/* motion mode: the film opens full screen over the hero and shrinks into the wordmark gap */
+.morph,.cue{display:none}
 .motion .morph{display:block;position:absolute;left:0;top:0;z-index:4;overflow:hidden;pointer-events:none;background:#3a120c}
+.motion .morph .film{object-position:50% 100%}
 .motion .wordmark__chip{visibility:hidden}
-.motion .release{visibility:hidden}
-.motion .release.on{visibility:visible}
+.motion .cue{display:block;position:absolute;z-index:5;left:50%;bottom:28px;transform:translateX(-50%);margin:0;color:var(--paper);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;text-shadow:0 1px 12px rgba(20,6,4,.5);animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{50%{transform:translate(-50%,6px)}}
 
 /* ───────── 5. Recordings ───────── */
 .rec{background:var(--grey);--bg:var(--grey);padding:clamp(48px,7vw,110px) var(--gut) clamp(56px,8vw,120px)}
